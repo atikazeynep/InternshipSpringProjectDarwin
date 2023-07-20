@@ -9,7 +9,7 @@ import org.springframework.cglib.core.Local;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Entity(name="cut_ord")
+@Entity(name="cust_ord")
 public class CustomerOrder {
     @Id
     private long cust_ord_id;

@@ -1,7 +1,6 @@
 package com.example.darwinproject.exception;
 
 //import com.example.restdemo.user.UserNotFoundException;
-import com.example.darwinproject.jpa.UserNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;

@@ -7,6 +7,7 @@ import com.example.darwinproject.config.CreateResponse;
 import com.example.darwinproject.domain.dto.DarwinUser;
 import com.example.darwinproject.domain.entities.DarwinUserEntity;
 import com.example.darwinproject.exception.UserExistsException;
+import com.example.darwinproject.exception.UserNotFoundException;
 import com.example.darwinproject.mapper.*;
 import com.example.darwinproject.repository.StatusRepository;
 import com.example.darwinproject.repository.TypeRepository;
@@ -79,15 +80,25 @@ public class UserService {
     }
 
     public GenericListResponse<List> findById(long id) {
-        DarwinUser user = UserMapper.INSTANCE.toUser(userRepository.findByUserId(id));
-        List datas = new ArrayList();
-        datas.add(user.getScreenName());
-        datas.add(user.getUserName());
-        datas.add(user.getCreateDate());
-        datas.add(user.getUserType().getName());
-        datas.add(user.getStatus().getName());
+        try{
+            DarwinUser user = UserMapper.INSTANCE.toUser(userRepository.findByUserId(id));
+            if(user == null){
+                throw new UserNotFoundException("User does not exist");
+            }
+            List datas = new ArrayList();
+            datas.add(user.getScreenName());
+            datas.add(user.getUserName());
+            datas.add(user.getCreateDate());
+            datas.add(user.getUserType().getName());
+            datas.add(user.getStatus().getName());
 
-        return GenericListResponse.createSuccessResponse(datas);
+            return GenericListResponse.createSuccessResponse(datas);
+        }catch(Exception e){
+            List datas = new ArrayList();
+            datas.add(id);
+            datas.add(e.getMessage());
+            return GenericListResponse.createFailResponse(datas);
+        }
     }
 
     public String generateCommonLangPassword() {

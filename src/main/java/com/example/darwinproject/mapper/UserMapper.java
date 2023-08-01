@@ -12,14 +12,18 @@ import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 import org.springframework.data.convert.TypeMapper;
 
-@Mapper(uses = {GeneralStatusMapper.class})
+@Mapper(uses = {UserMapper.class})
 public interface UserMapper {
-    GeneralStatusMapper INSTANCE = Mappers.getMapper(GeneralStatusMapper.class);
+    UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
     @Mappings({@Mapping(source = "scrName", target = "screenName"),
             @Mapping(source = "pwd", target = "password"),
             @Mapping(source = "uname", target = "userName"),
             @Mapping(source = "gnlStEntity", target = "status"),
-            @Mapping(source = "gnlTpEntity", target = "userType")
+            @Mapping(source = "gnlTpEntity", target = "userType"),
+            @Mapping(source = "cdate", target = "createDate"),
+            @Mapping(source = "cuser", target = "createUser"),
+            @Mapping(source = "udate", target = "updateDate"),
+            @Mapping(source = "uuser", target = "updateUser"),
     })
     DarwinUser toUser(DarwinUserEntity userEntity);
 

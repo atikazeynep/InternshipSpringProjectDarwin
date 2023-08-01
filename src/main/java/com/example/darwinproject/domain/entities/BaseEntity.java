@@ -6,13 +6,12 @@ import java.time.LocalDate;
 public class BaseEntity {
     @Column(name="cdate")
     private LocalDate cdate;
-    //@Column(name="cuser")
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "cuser")
     private DarwinUserEntity cuser;
     @Column(name="udate")
     private LocalDate udate;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "uuser")
     private DarwinUserEntity uuser;
 

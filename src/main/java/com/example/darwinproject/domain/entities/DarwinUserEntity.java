@@ -1,6 +1,12 @@
 package com.example.darwinproject.domain.entities;
 
+import com.example.darwinproject.util.ValidUsername;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.Mod10Check;
+import org.hibernate.validator.constraints.UniqueElements;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -9,22 +15,26 @@ import java.util.List;
 @Table(name="darwin_user")
 public class DarwinUserEntity extends BaseEntity {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="user_id")
-    private long userId;
+    @GeneratedValue()
+    private Long userId;
     @OneToMany(mappedBy = "usrEntity",cascade = CascadeType.ALL)
     private List<CustOrdEntity> custOrdEntities;
+    @NotBlank(message = "Screen Name is mandatory")
     @Column(name="scr_name")
     private String scrName;
     @Column(name="pwd")
     private String pwd;
+    @NotBlank(message = "Username is mandatory")
+    @UniqueElements(message = "Username must be unique")
+    @Size(min = 2, max = 10, message = "Username must be longer than 2 and shorter than 10")
+    @ValidUsername
     @Column(name="uname")
     private String uname;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "st_id")
     private GnlStEntity gnlStEntity;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "tp_id")
     private GnlTpEntity gnlTpEntity;
 

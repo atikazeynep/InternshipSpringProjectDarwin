@@ -1,5 +1,4 @@
-package com.example.darwinproject.domain.dto;
-
+package com.example.darwinproject.config;
 
 import com.example.darwinproject.util.ValidUsername;
 import jakarta.validation.Valid;
@@ -7,24 +6,20 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.UniqueElements;
 
-public class DarwinUser extends Base{
+public class CreateRequest {
     private Long userId;
     @NotEmpty(message = "Screen name is mandatory")
     private String screenName;
-    private String password;
+
     @Valid
     @NotEmpty(message = "Username is mandatory")
-    @UniqueElements(message = "Username must be unique")
     @Size(min = 2, max = 10, message = "Username must be longer than 2 and shorter than 10")
     @ValidUsername
     private String userName;
-    private GeneralStatus status;
-    private GeneralType userType;
+    private int status;
+    private int userType;
 
-    public DarwinUser() {
-    }
-
-    public DarwinUser(Long userId, String screenName, String userName, GeneralStatus status, GeneralType userType) {
+    public CreateRequest(Long userId, String screenName, String userName, int status, int userType) {
         this.userId = userId;
         this.screenName = screenName;
         this.userName = userName;
@@ -48,14 +43,6 @@ public class DarwinUser extends Base{
         this.screenName = screenName;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getUserName() {
         return userName;
     }
@@ -64,19 +51,19 @@ public class DarwinUser extends Base{
         this.userName = userName;
     }
 
-    public GeneralStatus getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(GeneralStatus status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
-    public GeneralType getUserType() {
+    public int getUserType() {
         return userType;
     }
 
-    public void setUserType(GeneralType userType) {
+    public void setUserType(int userType) {
         this.userType = userType;
     }
 }

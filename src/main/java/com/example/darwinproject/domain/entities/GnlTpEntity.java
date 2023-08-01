@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Table(name="gnl_tp")
-public class GnlTpEntity extends BaseEntity {
+public class GnlTpEntity extends BaseEntity{
     @Id
     @Column(name="gnl_tp_id")
     int typeId;

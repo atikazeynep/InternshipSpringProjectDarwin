@@ -19,9 +19,9 @@ public class GnlStEntity extends BaseEntity {
     private List<ProdOfrCharValEntity> prodOfrChValEntities;
     @OneToMany(mappedBy = "gnlStEntity",cascade = CascadeType.ALL)
     private List<CustOrdEntity> custOrdEntities;
-
+/*
     @OneToMany(mappedBy = "gnlStEntity",cascade = CascadeType.ALL)
-    private List<DarwinUserEntity> userEntities;
+    private List<DarwinUserEntity> userEntities;*/
 
     @Column(name="name")
     private String name;
@@ -48,6 +48,7 @@ public class GnlStEntity extends BaseEntity {
         this.is_actv = is_actv;
     }
 
+
     public int getStatusId() {
         return statusId;
     }
@@ -71,14 +72,14 @@ public class GnlStEntity extends BaseEntity {
     public void setProdOfrChValEntities(List<ProdOfrCharValEntity> prodOfrChValEntities) {
         this.prodOfrChValEntities = prodOfrChValEntities;
     }
-
+/*
     public List<DarwinUserEntity> getUserEntities() {
         return userEntities;
     }
 
     public void setUserEntities(List<DarwinUserEntity> userEntities) {
         this.userEntities = userEntities;
-    }
+}*/
 
     public String getName() {
         return name;

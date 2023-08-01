@@ -16,6 +16,22 @@ public class GeneralType extends Base{
 
     private List<DarwinUser> users;
 
+    public GeneralType() {
+    }
+
+    public GeneralType(int typeId, String name, String description, String shortCode, String entityCodeName, boolean isActive) {
+        this.typeId = typeId;
+        this.name = name;
+        this.description = description;
+        this.shortCode = shortCode;
+        this.entityCodeName = entityCodeName;
+        this.isActive = isActive;
+    }
+
+    public GeneralType(int typeId) {
+        this.typeId = typeId;
+    }
+
     public List<ProductOffer> getProductOffers() {
         return productOffers;
     }

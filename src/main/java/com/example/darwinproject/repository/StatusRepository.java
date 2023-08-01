@@ -1,7 +1,7 @@
 package com.example.darwinproject.repository;
 
-import com.example.darwinproject.domain.dto.DarwinUser;
 import com.example.darwinproject.domain.entities.DarwinUserEntity;
+import com.example.darwinproject.domain.entities.GnlStEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,13 +9,10 @@ import java.util.List;
 import java.util.function.Predicate;
 
 @Repository
-public interface UserRepository extends JpaRepository<DarwinUserEntity, Long> {
+public interface StatusRepository extends JpaRepository<GnlStEntity, Integer> {
     //it might be CrudRepository instead of JpaRepository, Keep that in mind
     //DarwinUserEntity findByName(String name);
-    List<DarwinUserEntity> findByUname(String name);
-    DarwinUserEntity findByUserId(long id);
-
-    void removeByUserId(long id);  //(Predicate predicate);
+    GnlStEntity findByStatusId(int id);
 
     /*
     In a typical Java application, you might expect to write a class that implements CustomerRepository.

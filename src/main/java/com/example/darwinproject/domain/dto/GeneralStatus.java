@@ -13,6 +13,22 @@ public class  GeneralStatus extends Base{
 
     private List<ProductOfferCharValue> productOfferCharValues;
 
+    public GeneralStatus() {
+    }
+
+    public GeneralStatus(int statusId) {
+        this.statusId = statusId;
+    }
+
+    public GeneralStatus(int statusId, String name, String description, String shortCode, String entityName, boolean isActive) {
+        this.statusId = statusId;
+        this.name = name;
+        this.description = description;
+        this.shortCode = shortCode;
+        this.entityName = entityName;
+        this.isActive = isActive;
+    }
+
     private List<DarwinUser> users;
 
     public void setActive(boolean active) {

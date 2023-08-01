@@ -1,57 +1,57 @@
 package com.example.darwinproject.controller;
 
-import com.example.darwinproject.domain.entities.DarwinUserEntity;
+import com.example.darwinproject.config.CreateRequest;
+import com.example.darwinproject.config.GenericListResponse;
+import com.example.darwinproject.config.GenericResponse;
+import com.example.darwinproject.config.CreateResponse;
+import com.example.darwinproject.domain.dto.DarwinUser;
 import com.example.darwinproject.exception.UserNotFoundException;
-import com.example.darwinproject.repository.UserRepository;
 import com.example.darwinproject.service.UserService;
+import com.example.darwinproject.util.ValidUsername;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
+import java.sql.SQLException;
 import java.util.List;
 
 @RestController
+@RequestMapping("/darwin")
+@Validated
 public class UserController {
-    @Autowired
     UserService service;
 
-    public UserController(UserRepository repository) {
-        //this.service = service;
+    public UserController(UserService service) {
         this.service = service;
     }
 
-    @GetMapping("/darwinUser")
-    public List<DarwinUserEntity> retrieveAllUsers() {
-        System.out.println("ALL USERS ARE SENT in JpaResource");
+    @GetMapping("/user")
+    public List<DarwinUser> retrieveAllUsers() {
         return service.findAll();
     }
 
-    @GetMapping("/darwinUser/{id}")
-    public DarwinUserEntity retrieveUser(@PathVariable long id) {
-        DarwinUserEntity user = service.findById(id);
-        if (user == null) {
-            throw new UserNotFoundException("id: " + id);
-        }
-
-        return user;
+    @GetMapping("/user/{id}")
+    public ResponseEntity<GenericListResponse<List>> inquireUser(@PathVariable (value="id") long id) throws UserNotFoundException{
+        GenericListResponse<List> response = service.findById(id);
+        return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping("/darwinUser/{id}")
+    @DeleteMapping("/user/{id}")
     public void deleteUser(@PathVariable long id) {
         service.deleteById(id);
     }
 
-    @PostMapping("/darwinUser")
-    public ResponseEntity<DarwinUserEntity> createUser(@Valid @RequestBody DarwinUserEntity user) {
-        System.out.println("A USER CREATED IN REPOSITORY");
-        DarwinUserEntity savedUser = service.save(user);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(savedUser.getUserId())
-                .toUri();
-        return ResponseEntity.created(location).build();
+    @PostMapping("/user")
+    public ResponseEntity<GenericResponse<Object>> createUser(@Valid @RequestBody CreateRequest request) throws SQLException {
+        GenericResponse<Object> response = service.createUser(request);
+
+        if(response.getReturnCode() == 200)
+            return ResponseEntity.ok(response);
+        else
+            return new ResponseEntity<>(response, HttpStatus.I_AM_A_TEAPOT);
     }
+
+
 }

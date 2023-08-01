@@ -21,8 +21,9 @@ public class CustOrdEntity extends BaseEntity {
     @JoinColumn(name = "cust_ord_st_id")
     private GnlStEntity gnlStEntity;
 
+    /*
     @OneToMany(mappedBy = "custOrdEntity",cascade = CascadeType.ALL)
-    private List<CustOrdChValEntity> custOrdChValEntities;
+    private List<CustOrdChValEntity> custOrdChValEntities;*/
 
     public CustOrdEntity() {
     }
@@ -52,14 +53,14 @@ public class CustOrdEntity extends BaseEntity {
     public void setUsrEntity(DarwinUserEntity usrEntity) {
         this.usrEntity = usrEntity;
     }
-
+/*
     public List<CustOrdChValEntity> getCustOrdChValEntities() {
         return custOrdChValEntities;
     }
 
     public void setCustOrdChValEntities(List<CustOrdChValEntity> custOrdChValEntities) {
         this.custOrdChValEntities = custOrdChValEntities;
-    }
+    }*/
 
     public ProdOfrEntity getProdOfrEntity() {
         return prodOfrEntity;

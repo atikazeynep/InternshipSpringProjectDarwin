@@ -43,6 +43,7 @@ public class UserController {
         service.deleteById(id);
     }
 
+    //a new comment
     @PostMapping("/user")
     public ResponseEntity<GenericResponse<Object>> createUser(@Valid @RequestBody CreateRequest request) throws SQLException {
         GenericResponse<Object> response = service.createUser(request);

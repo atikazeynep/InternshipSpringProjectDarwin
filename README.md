@@ -7,7 +7,12 @@ Hi there! This is the project which I worked on during my summer internship in E
   * customer order characteristic value
   * product offer
   * product offer characteristic value
+```
+ /\_/\  
+( o.o ) 
+ > ^ <
 
+```
 And I've told to create two APIs: createUser and inquireUser. Also I've given a relational database table queries that will help me to have base tables for statuses, types, and etc.
 
 While completing the project, I've created a structure like this:
